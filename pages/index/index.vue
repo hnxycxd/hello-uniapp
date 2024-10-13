@@ -6,6 +6,7 @@
           v-model="formValues.name"
           border="none"
           disabled
+          disabledColor="#fff"
           inputAlign="right"
           class="pop-select"
         />
@@ -17,7 +18,13 @@
       </u-form-item>
 
       <u-form-item label="兴趣" prop="hobby" borderBottom @click="showHobbySelect = true">
-        <u--input v-model="formValues.hobby" border="none" disabled inputAlign="right" />
+        <u--input
+          v-model="formValues.hobby"
+          border="none"
+          disabled
+          disabledColor="#fff"
+          inputAlign="right"
+        />
         <u-icon slot="right" name="arrow-right" />
       </u-form-item>
     </u--form>

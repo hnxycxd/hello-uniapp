@@ -11,7 +11,12 @@
 
       <scroll-view scroll-y scroll-top="scrollTop" style="max-height: 60vh">
         <view v-if="multiple">
-          <u-checkbox-group v-model="selectValue" placement="column" @change="radioChange">
+          <u-checkbox-group
+            v-model="selectValue"
+            placement="column"
+            borderBottom
+            icon-placement="right"
+          >
             <u-checkbox
               :customStyle="{ padding: '10px 8px' }"
               v-for="item in optionsFilter"
@@ -27,6 +32,7 @@
             v-model="selectValue"
             placement="column"
             borderBottom
+            icon-placement="right"
             @change="radioChange"
           >
             <u-radio
@@ -72,10 +78,11 @@ export default {
   data() {
     return {
       selectValue: this.value,
+      prevRadioValue: this.value,
       keyword: '',
       optionsFilter: this.options,
       scrollTop: 0,
-      showOverlay: false,
+      // showOverlay: false,
     }
   },
   watch: {
@@ -104,8 +111,14 @@ export default {
         (e) => String(e.name).includes(val) || String(e.label).includes(val)
       )
     },
+    // 让radio可取消
     radioChange(val) {
-      console.log('radio or checkbox changed', val)
+      if (val === this.prevRadioValue) {
+        this.selectValue = ''
+        this.prevRadioValue = ''
+        return
+      }
+      this.prevRadioValue = val
     },
     close() {
       this.$emit('update:show', false)
